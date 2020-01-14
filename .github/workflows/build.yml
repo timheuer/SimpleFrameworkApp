@@ -20,5 +20,5 @@ jobs:
     - name: Restore NuGet Packages
       run: nuget restore SimpleFrameworkApp.sln
 
-    - name: Build Web App
-      run: msbuild SimpleFrameworkApp.sln -p:Configuration=Release
+    - name: Build and Publish Web App
+      run: msbuild SimpleFrameworkApp.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
