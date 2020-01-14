@@ -14,5 +14,8 @@ jobs:
     - name: Setup MSBuild Path
       uses: warrenbuckley/Setup-MSBuild@v1
     
+    - name: Restore NuGet Packages
+      run: msbuild SimpleFrameworkApp.sln -t:Restore
+
     - name: Build Web App
-      run: msbuild SimpleFrameworkApp.sln -p:Configuration=Release -r
+      run: msbuild SimpleFrameworkApp.sln -p:Configuration=Release
