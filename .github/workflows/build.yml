@@ -15,4 +15,4 @@ jobs:
       uses: warrenbuckley/Setup-MSBuild@v1
     
     - name: Build Web App
-      run: msbuild SimpleFrameworkApp.sln -p:Configuration=Release
+      run: msbuild SimpleFrameworkApp.sln -p:Configuration=Release -r
