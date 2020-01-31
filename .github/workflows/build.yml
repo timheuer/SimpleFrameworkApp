@@ -26,7 +26,7 @@ jobs:
       run: nuget restore ${{ env.AZURE_WEBAPP_NAME }}
 
     - name: Build and Publish Web App
-      run: msbuild ${{ env.AZURE_WEBAPP_NAME }} /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      run: msbuild ${{ env.AZURE_WEBAPP_NAME }} /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=${{ env.AZURE_WEBAPP_PACKAGE_PATH }} /p:PackageAsSingleFile=false
 
     - name: Deploy to Azure WebApp
       uses: azure/webapps-deploy@v1
