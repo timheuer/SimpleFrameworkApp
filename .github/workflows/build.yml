@@ -16,16 +16,19 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Setup MSBuild Path
+    - name: Setup MSBuild path
       uses: warrenbuckley/Setup-MSBuild@v1
     
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.2
     
-    - name: Restore NuGet Packages
+    - name: Restore NuGet pckages
       run: nuget restore ${{ env.AZURE_WEBAPP_NAME }}
 
-    - name: Build and Publish Web App
+    - name: Build
+      run: msbuild ${{ env.AZURE_WEBAPP_NAME }} /p:Configuration=Release
+
+    - name: Publish to folder
       run: msbuild ${{ env.AZURE_WEBAPP_NAME }} /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=${{ env.AZURE_WEBAPP_PACKAGE_PATH }} /p:PackageAsSingleFile=false
 
     - name: Deploy to Azure WebApp
