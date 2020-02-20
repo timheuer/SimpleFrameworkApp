@@ -15,6 +15,9 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
+
+    - name: Test VSWhere
+      run: vswhere -version
     
     - name: Setup MSBuild path
       uses: warrenbuckley/Setup-MSBuild@v1
