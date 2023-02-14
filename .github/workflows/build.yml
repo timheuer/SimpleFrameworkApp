@@ -15,12 +15,10 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Setup MSBuild path
-      uses: microsoft/setup-msbuild@v1.0.1
-      with:
-        vs-version: "[16.4,16.9)"
-    
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+  
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.2
     
@@ -31,14 +29,7 @@ jobs:
       run: msbuild ${{ env.AZURE_WEBAPP_NAME }} /p:Configuration=Release
 
     - name: Publish to folder
-      run: msbuild ${{ env.AZURE_WEBAPP_NAME }} /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=${{ env.AZURE_WEBAPP_PACKAGE_PATH }} /p:PackageAsSingleFile=false
-
-    - name: Deploy to Azure WebApp
-      uses: azure/webapps-deploy@v1
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      run: msbuild ${{ env.AZURE_WEBAPP_NAME }} /p:Configuration=Release /p:DeployOnBuild=true
 
     - name: Publish artifacts
       uses: actions/upload-artifact@v1.0.0
