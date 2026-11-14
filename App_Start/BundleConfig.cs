@@ -19,8 +19,9 @@ namespace SimpleFrameworkApp
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+            // Bootstrap 5's JavaScript uses modern syntax that the legacy ASP.NET
+            // System.Web.Optimization minifier cannot parse. Keep it out of the bundle
+            // pipeline and include it directly in the layout instead.
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
