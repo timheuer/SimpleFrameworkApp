@@ -19,6 +19,8 @@ namespace SimpleFrameworkApp
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            // Keep Bootstrap JS out of the optimized bundle. The legacy System.Web.Optimization
+            // minifier cannot parse Bootstrap 5's modern JavaScript syntax without throwing.
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
